@@ -1080,6 +1080,9 @@ require('lazy').setup({
 })
 
 vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Toggle Oil' })
+vim.keymap.set('n', '<LEADER>bn', '<cmd>bn<cr>', { desc = '[B]uffer [N]ext' })
+vim.keymap.set('n', '<LEADER>bp', '<cmd>bp<cr>', { desc = '[B]uffer [P]revious' })
+vim.keymap.set('n', '<LEADER>bd', '<cmd>bd<cr>', { desc = '[B]uffer [D]elete' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
