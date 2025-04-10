@@ -1142,6 +1142,7 @@ vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Toggle Oil' })
 vim.keymap.set('n', '<LEADER>bn', '<cmd>bn<cr>', { desc = '[B]uffer [N]ext' })
 vim.keymap.set('n', '<LEADER>bp', '<cmd>bp<cr>', { desc = '[B]uffer [P]revious' })
 vim.keymap.set('n', '<LEADER>bd', '<cmd>bd<cr>', { desc = '[B]uffer [D]elete' })
+vim.keymap.set('n', '<LEADER>bda', '<cmd>bufdo bd!<cr>', { desc = '[B]uffer [D]elete [A]ll' })
 vim.keymap.set('n', '<C-h>', '<cmd>bp<cr>')
 vim.keymap.set('n', '<C-l>', '<cmd>bn<cr>')
 
