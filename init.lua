@@ -184,10 +184,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -398,6 +398,7 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
+        -- Other picker configurations
         pickers = {
           find_files = {
             theme = 'ivy', -- or 'get_ivy' depending on your theme plugin
@@ -409,7 +410,9 @@ require('lazy').setup({
           live_grep = {
             theme = 'ivy', -- or 'get_ivy' depending on your theme plugin
           },
-          -- Other picker configurations
+          lsp_document_symbols = {
+            theme = 'ivy',
+          },
         },
         extensions = {
           file_browser = {
@@ -918,6 +921,7 @@ require('lazy').setup({
         },
 
         on_colors = function(colors)
+          -- colors.bg = '#ffffff'
           colors.bg = '#000000'
         end,
       }
@@ -928,6 +932,61 @@ require('lazy').setup({
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
+
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function()
+      vim.g.barbar_auto_setup = false
+    end,
+    opts = {
+      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+      -- animation = true,
+      -- insert_at_start = true,
+      -- …etc.
+    },
+    -- version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  },
+
+  -- {
+  --   'bluz71/vim-moonfly-colors',
+  --   name = 'moonfly',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'moonfly'
+  --   end,
+  -- },
+
+  -- {
+  --   'projekt0n/github-nvim-theme',
+  --   name = 'github-theme',
+  --   lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  --   priority = 1000, -- make sure to load this before all the other start plugins
+  --   config = function()
+  --     require('github-theme').setup {
+  --       options = {
+  --         styles = {
+  --           -- comments = 'italic',
+  --         },
+  --       },
+  --
+  --       palettes = {
+  --         github_dark_default = {
+  --           fg0 = '#000000', -- Black background
+  --           bg0 = '#000000', -- Alt backgrounds (floats, statusline, ...)
+  --           bg3 = '#000000', -- 55% darkened from stock
+  --           sel0 = '#000000', -- 55% darkened from stock
+  --         },
+  --       },
+  --     }
+  --
+  --     vim.cmd 'colorscheme github_dark_default'
+  --   end,
+  -- },
 
   -- {
   --   'Mofiqul/vscode.nvim',
@@ -1083,6 +1142,8 @@ vim.keymap.set('n', '-', '<cmd>Oil<cr>', { desc = 'Toggle Oil' })
 vim.keymap.set('n', '<LEADER>bn', '<cmd>bn<cr>', { desc = '[B]uffer [N]ext' })
 vim.keymap.set('n', '<LEADER>bp', '<cmd>bp<cr>', { desc = '[B]uffer [P]revious' })
 vim.keymap.set('n', '<LEADER>bd', '<cmd>bd<cr>', { desc = '[B]uffer [D]elete' })
+vim.keymap.set('n', '<C-h>', '<cmd>bp<cr>')
+vim.keymap.set('n', '<C-l>', '<cmd>bn<cr>')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
