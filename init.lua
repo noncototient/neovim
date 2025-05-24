@@ -1,4 +1,4 @@
---[[
+--[[init
 
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
@@ -932,6 +932,27 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'datsfilipe/vesper.nvim',
+    config = function()
+      require('vesper').setup {
+        palette_overrides = {
+          -- Override the default palette colors
+          bg = '#000000',
+        },
+        italics = {
+          comments = false, -- Boolean: Italicizes comments
+          keywords = false, -- Boolean: Italicizes keywords
+          functions = false, -- Boolean: Italicizes functions
+          strings = false, -- Boolean: Italicizes strings
+          variables = false, -- Boolean: Italicizes variables
+        },
+      }
+
+      vim.cmd.colorscheme 'vesper'
+    end,
+  },
+
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -956,7 +977,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
 
@@ -989,7 +1010,9 @@ require('lazy').setup({
     opts = {
       -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
       animation = false,
-      insert_at_end = true,
+      insert_at_start = true,
+      insert_at_end = false,
+      auto_hide = 1,
       -- …etc.
     },
     -- version = '^1.0.0', -- optional: only update when a new 1.x version is released
@@ -1144,11 +1167,11 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.indent_line',
+  -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -1187,10 +1210,14 @@ vim.keymap.set('n', '<LEADER>bn', '<cmd>bn<cr>', { desc = '[B]uffer [N]ext' })
 vim.keymap.set('n', '<LEADER>bp', '<cmd>bp<cr>', { desc = '[B]uffer [P]revious' })
 vim.keymap.set('n', '<LEADER>bd', '<cmd>BufferClose<cr>', { desc = '[B]uffer [D]elete' })
 vim.keymap.set('n', '<LEADER>bda', '<cmd>BufferCloseAllButPinned<cr>', { desc = '[B]uffer [D]elete [A]ll (Except Pinned)' })
-vim.keymap.set('n', '<LEADER>bb', '<cmd>BufferOrderByWindowNumber<cr>', { desc = '[B]uffer [B]uffer Order' })
+vim.keymap.set('n', '<LEADER>bb', '<cmd>BufferOrderByBufferNumber<cr>', { desc = '[B]uffer [B]uffer Order' })
 vim.keymap.set('n', '<LEADER>bp', '<cmd>BufferPin<cr>', { desc = '[B]uffer [B]uffer Sort' })
 vim.keymap.set('n', '<C-h>', '<cmd>bp<cr>')
 vim.keymap.set('n', '<C-l>', '<cmd>bn<cr>')
+
+vim.keymap.set('n', '<LEADER>cc', '<cmd>CopilotChat<cr>', { desc = '[C]opilot [C]hat Open' })
+vim.keymap.set('i', '<LEADER>cc', '<cmd>CopilotChat<cr>', { desc = '[C]opilot [C]hat Open' })
+vim.keymap.set('i', '<LEADER>cf', '<cmd>CopilotChatFix<cr>', { desc = '[C]opilot [C]hat Fix' })
 
 -- WSL Clipboard support
 local is_wsl = vim.fn.has 'wsl' == 1
